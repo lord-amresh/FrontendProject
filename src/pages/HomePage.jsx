@@ -20,7 +20,7 @@ function HomePage(){
             {
                 books.map(function(book){//books bhanne state lai loop gariyo using map
                     return (
-                        <Card book = {book} />
+                        <Card book = {book} key={book.id} />
                     )
                 })
             }
