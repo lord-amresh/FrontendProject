@@ -32,7 +32,8 @@ function SinglePage(){
         <h1>{book.bookName}</h1>
         <p>{book.bookPrice}</p>
         <p>{book.bookAuthor}</p>
-        <button onClick={deleteBook}>Delete Me</button>
+         <button onClick={deleteBook}>Delete Me</button>
+
         </>
     )
 }
