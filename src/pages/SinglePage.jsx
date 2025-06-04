@@ -24,6 +24,7 @@ function SinglePage(){
         }else{
             alert("Something went Wrong")
         }
+        //console.log("Delete function triggered vayo hai..")
     }
 
     return(
