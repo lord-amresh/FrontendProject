@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 function CreatePage(){
+  const navigate = useNavigate()
 
     const [bookData, setBookData] = useState({
         bookName : "",
@@ -23,11 +25,17 @@ function CreatePage(){
 
     const submitData =async (event)=>{
         event.preventDefault()
-        console.log("Submit data call bhayo")
           //mathistate ma bhako data lai dine --localhost:3000/api/books -post method ma
           // post garda duita pathaunai paryo,pathaune data ko format always object hunu parchha jun at the end axiosle json ma convert garera pathai dinxa   
         const response = await axios.post("http://localhost:3000/api/books",bookData)
-    }
+        if(response.status === 200){
+          alert("Book added Successfully")
+          navigate("/")
+        }else{
+          alert("Something went Wrong")
+        }   
+
+      }
  
     return(
         <>
@@ -58,13 +66,14 @@ function CreatePage(){
         </div>
         <div className="col-span-6 sm:col-span-3">
           <label htmlFor="price" className="text-sm font-medium text-gray-900 block mb-2">Price</label>
-          <input onChange={handleChange} type="bookPrice" name="price" id="price" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="$2300" required />
+          <input onChange={handleChange} type="bookPrice" name="bookPrice" id="price" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="$2300" required />
         </div>
        </div>
-    </form>
-    <div className="p-6 border-t border-gray-200 rounded-b">
+           <div className="p-6 border-t border-gray-200 rounded-b">
     <button className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Save all</button>
   </div>
+    </form>
+
   </div>
   
 </div>
