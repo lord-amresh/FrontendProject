@@ -34,7 +34,7 @@ function SinglePage(){
         <p>{book.bookPrice}</p>
         <p>{book.bookAuthor}</p>
          <button onClick={deleteBook}>Delete Me</button>
-         <Link to='/edit-page'><button>Edit Me</button></Link>
+         <Link to={`/edit-page/${book.id}`}><button>Edit Me</button></Link>
 
         </>
     )
