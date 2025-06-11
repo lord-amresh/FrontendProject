@@ -14,6 +14,23 @@ function EditPage(){
     useEffect(()=>{
         fetchBook()
     },[])
+    const handleChange = (event)=>{
+        let {name,value} = event.target 
+        setBook({
+            ...book,
+            [name] : value
+        }) 
+    }
+    console.log(book,"Book hooo")
+    const editBook = async (event)=>{
+        event.preventDefault()
+        const response = await axios.patch("http://localhost:3000/api/books/" + id,book)
+        if (response.status == 200){
+            alert("Edited Successfully")
+        }else{
+            alert('Something went Wrong')
+        }
+    }
     return(
         <>
         <Navbar/>
@@ -27,23 +44,23 @@ function EditPage(){
     </button>
   </div>
   <div className="p-6 space-y-6">
-    <form >
+    <form onSubmit={editBook}>
       <div className="grid grid-cols-6 gap-6">
         <div className="col-span-6 sm:col-span-3">
           <label htmlFor="product-name" className="text-sm font-medium text-gray-900 block mb-2">Book Name</label>
-          <input value={book.bookName} type="text" name="bookName" id="product-name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Rich Dad Poor Dad”" required />
+          <input onChange={handleChange} value={book.bookName} type="text" name="bookName" id="product-name" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Rich Dad Poor Dad”" required />
         </div>
         <div className="col-span-6 sm:col-span-3">
           <label htmlFor="category" className="text-sm font-medium text-gray-900 block mb-2">Book Genre</label>
-          <input value={book.bookGenre} type="text" name="bookGenre" id="category" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Fictional" required />
+          <input onChange={handleChange} value={book.bookGenre} type="text" name="bookGenre" id="category" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Fictional" required />
         </div>
         <div className="col-span-6 sm:col-span-3">
-          <label htmlFor="brand" className="text-sm font-medium text-gray-900 block mb-2">Book Author</label>bran
-          <input value={book.bookAuthor} type="text" name="bookAuthor" id="brand" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Robert T Kiyosaki" required />
+          <label htmlFor="brand" className="text-sm font-medium text-gray-900 block mb-2">Book Author</label>
+          <input onChange={handleChange} value={book.bookAuthor} type="text" name="bookAuthor" id="brand" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Robert T Kiyosaki" required />
         </div>
         <div className="col-span-6 sm:col-span-3">
           <label htmlFor="price" className="text-sm font-medium text-gray-900 block mb-2">Price</label>
-          <input value={book.bookPrice} type="bookPrice" name="bookPrice" id="price" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="$2300" required />
+          <input onChange={handleChange} value={book.bookPrice} type="bookPrice" name="bookPrice" id="price" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="$2300" required />
         </div>
        </div>
            <div className="p-6 border-t border-gray-200 rounded-b">
